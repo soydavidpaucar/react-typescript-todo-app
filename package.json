@@ -11,14 +11,17 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "lint:fix": "eslint --fix --ext .ts,tsx,js,jsx,css,html --ignore-path .gitignore .",
-    "prettier:write": "prettier -u -w --ignore-path .gitignore \"*.{ts,tsx,css,html,js,jsx}\""
+    "lint:fix": "eslint --fix --ext .ts,tsx,js,jsx --ignore-path .gitignore .",
+    "prettier:write": "prettier -u -w --ignore-path .gitignore \"*.{ts,tsx,css,html,js,jsx}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/react": "^18.0.24",
@@ -36,6 +39,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.2",
     "jsdom": "^20.0.3",
     "lint-staged": "^13.0.4",
     "prettier": "^2.8.0",
