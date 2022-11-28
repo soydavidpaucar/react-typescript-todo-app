@@ -13,7 +13,7 @@
     "test": "vitest",
     "lint:fix": "eslint --fix --ext .ts,tsx,js,jsx --ignore-path .gitignore .",
     "prettier:write": "prettier -u -w --ignore-path .gitignore \"*.{ts,tsx,css,html,js,jsx}\"",
-    "postinstall": "husky install"
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
