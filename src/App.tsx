@@ -1,7 +1,11 @@
+import PageTitle from './components/PageTitle';
+
 function App() {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="bg-[#0a192f]">
+      <div className="max-w-7xl w-[90%] m-auto">
+        <PageTitle>TODO LIST</PageTitle>
+      </div>
     </div>
   );
 }
