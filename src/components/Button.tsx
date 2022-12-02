@@ -18,7 +18,7 @@ function Button({ children, type, variant }: ButtonProps) {
     <button
       className={`inline-block h-auto py-[8px] px-[20px] border-none rounded font-medium text-base capitalize ${
         {
-          primary: 'bg-[#64ffda] text-64ffda[#]',
+          primary: 'bg-[#64ffda] text-[#0a192f]',
           secondary: 'bg-[#8892b0] text-[#ccd6f6]',
         }[variant]
       }`}
