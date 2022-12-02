@@ -1,19 +1,18 @@
-import { DetailedHTMLProps, SelectHTMLAttributes } from 'react';
+import { ReactNode } from 'react';
 
 type ButtonProps = {
   children: string;
   variant: 'primary' | 'secondary';
   type: string;
+  onClick?: () => void;
+  onKeyDown?: () => void;
 };
 
 type SelectButtonProps = {
-  children: DetailedHTMLProps<
-    SelectHTMLAttributes<HTMLSelectElement>,
-    HTMLSelectElement
-  >['children'];
+  children: ReactNode;
 };
 
-function Button({ children, type, variant }: ButtonProps) {
+function Button({ children, type, variant, ...additionalProps }: ButtonProps) {
   return (
     <button
       className={`inline-block h-auto py-[8px] px-[20px] border-none rounded font-medium text-base capitalize ${
@@ -22,7 +21,8 @@ function Button({ children, type, variant }: ButtonProps) {
           secondary: 'bg-[#8892b0] text-[#ccd6f6]',
         }[variant]
       }`}
-      type={type === 'button' ? 'button' : 'submit'}>
+      type={type === 'button' ? 'button' : 'submit'}
+      {...additionalProps}>
       {children}
     </button>
   );
