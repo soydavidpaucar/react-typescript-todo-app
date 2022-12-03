@@ -16,9 +16,14 @@ const todosSlice = createSlice({
   initialState: initialValue,
   reducers: {
     addTodo: (state, action) => {
-      if (action.payload) {
+      const todos = localStorage.getItem('todos');
+      if (todos) {
         state.todos.push(action.payload);
-        localStorage.setItem('todos', JSON.stringify(state.todos));
+        const parsedTodos = JSON.parse(todos);
+        parsedTodos.push({ ...action.payload });
+        localStorage.setItem('todos', JSON.stringify(parsedTodos));
+      } else {
+        localStorage.setItem('todos', JSON.stringify([{ ...action.payload }]));
       }
     },
   },
