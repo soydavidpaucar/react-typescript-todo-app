@@ -1,6 +1,7 @@
 import { MdOutlineClose } from 'react-icons/md';
 import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { Button } from './Button';
 import { addTodo } from '../actions/todoActions';
 
@@ -31,11 +32,20 @@ function TodoModal({ showModal, setShowModal }: TodoModalProps) {
       dispatch(
         addTodo({
           id: crypto.randomUUID(),
-          title,
+          title: title.trim(),
           status,
           time: new Date().toLocaleString(),
         })
       );
+      toast.success('Task added successfully!', {
+        position: 'top-center',
+      });
+      setShowModal(!showModal);
+      setFormState({ title: '', status: 'uncompleted' });
+    } else {
+      toast.error('Title field is required', {
+        position: 'top-center',
+      });
     }
   };
 
