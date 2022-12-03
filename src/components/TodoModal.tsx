@@ -1,5 +1,8 @@
 import { MdOutlineClose } from 'react-icons/md';
+import { FormEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button } from './Button';
+import { addTodo } from '../actions/todoActions';
 
 type TodoModalProps = {
   showModal: boolean;
@@ -7,6 +10,35 @@ type TodoModalProps = {
 };
 
 function TodoModal({ showModal, setShowModal }: TodoModalProps) {
+  const [{ title, status }, setFormState] = useState({
+    title: '',
+    status: 'uncompleted',
+  } as { title: string; status: 'completed' | 'uncompleted' });
+
+  const dispatch = useDispatch();
+  const handleChanges = ({ target }: { target: EventTarget }) => {
+    const { name, value } = target as HTMLInputElement;
+
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    if (title.trim() !== '' && status.trim() !== '') {
+      dispatch(
+        addTodo({
+          id: crypto.randomUUID(),
+          title,
+          status,
+          time: new Date().toLocaleString(),
+        })
+      );
+    }
+  };
+
   return showModal ? (
     <div className="fixed top-0 left-0 w-full h-full bg-black/[.3] z-[1] flex items-center justify-center">
       <div className="backdrop-blur-sm max-w-lg bg-[rgb(10,25,47)]/[.85] w-[90%] text-white m-auto flex items-center justify-center p-4 rounded relative">
@@ -17,7 +49,7 @@ function TodoModal({ showModal, setShowModal }: TodoModalProps) {
           onKeyDown={() => setShowModal(!showModal)}>
           <MdOutlineClose />
         </button>
-        <form className="w-full">
+        <form className="w-full" onSubmit={(event) => handleSubmit(event)}>
           <h2 className="text-[#ccd6f6] capitalize text-[20px] font-semibold mb-5">
             Add TODO
           </h2>
@@ -25,8 +57,11 @@ function TodoModal({ showModal, setShowModal }: TodoModalProps) {
             Title
             <input
               className="backdrop-blur-sm border-none w-full mt-[8px] mb-[20px] rounded p-[10px] bg-[#8892b0]/[.5] text-[#ccd6f6] outline-none"
+              name="title"
               type="text"
               id="title"
+              value={title}
+              onChange={handleChanges}
             />
           </label>
           <label className="text-[#ccd6f6] text-base" htmlFor="status">
@@ -34,7 +69,9 @@ function TodoModal({ showModal, setShowModal }: TodoModalProps) {
             <select
               className="backdrop-blur-sm border-none w-full mt-[8px] mb-[20px] rounded p-[10px] bg-[#8892b0]/[.5] text-[#ccd6f6] outline-none"
               name="status"
-              id="status">
+              id="status"
+              onChange={handleChanges}
+              value={status}>
               <option value="completed">Completed</option>
               <option value="uncompleted">Uncompleted</option>
             </select>
