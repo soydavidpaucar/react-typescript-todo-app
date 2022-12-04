@@ -25,12 +25,14 @@ const todosSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       state.todos.push(action.payload);
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     },
     deleteTodo: (state, action) => {
       const index = state.todos.findIndex(
         (todo: Todo) => todo.id === action.payload
       );
       state.todos.splice(index, 1);
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     },
   },
 });
