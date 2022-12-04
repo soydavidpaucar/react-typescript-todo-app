@@ -1,10 +1,11 @@
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/all';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { deleteTodo } from '../actions/todoActions';
+import { deleteTodo, updateStatus } from '../actions/todoActions';
+import CheckButton from './CheckButton';
 import TodoModal from './TodoModal';
 
 interface Todo {
@@ -20,6 +21,15 @@ type TodoItemProps = {
 function TodoItem({ todo }: TodoItemProps) {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [check, setCheck] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (todo.status === 'completed') {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  }, [todo.status]);
 
   const handleEdit = () => {
     setShowModal(!showModal);
@@ -29,11 +39,20 @@ function TodoItem({ todo }: TodoItemProps) {
     toast.success('Task deleted successfully!');
   };
 
+  const handleCheck = () => {
+    dispatch(
+      updateStatus({
+        ...todo,
+        status: check ? 'uncompleted' : 'completed',
+      })
+    );
+  };
+
   return (
     <>
       <div className="flex items-center justify-between p-[10px] mb-4 rounded last:mb-0 bg-[#8892b0]/[.20] backdrop-blur">
         <div className="flex items-center justify-start gap-[10px]">
-          []
+          <CheckButton check={check} handleCheck={handleCheck} />
           <div className="flex flex-col overflow-hidden">
             <p
               className={`text-[#ccd6f6] text-base ${
