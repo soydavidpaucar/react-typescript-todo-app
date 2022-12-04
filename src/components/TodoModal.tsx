@@ -1,22 +1,33 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { addTodo } from '../actions/todoActions';
+import { addTodo, updateTodo } from '../actions/todoActions';
 import { Button } from './Button';
 
 type TodoModalProps = {
   type: string;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
+  todo?: {
+    id: string;
+    title: string;
+    status: 'completed' | 'uncompleted';
+  };
 };
 
-function TodoModal({ type, showModal, setShowModal }: TodoModalProps) {
+function TodoModal({ type, showModal, setShowModal, todo }: TodoModalProps) {
   const [{ title, status }, setFormState] = useState({
     title: '',
     status: 'uncompleted',
   } as { title: string; status: 'completed' | 'uncompleted' });
+
+  useEffect(() => {
+    if (todo) {
+      setFormState({ title: todo.title, status: todo.status });
+    }
+  }, [todo]);
 
   const dispatch = useDispatch();
   const handleChanges = ({ target }: { target: EventTarget }) => {
@@ -30,24 +41,37 @@ function TodoModal({ type, showModal, setShowModal }: TodoModalProps) {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+
+    if (title === '') {
+      toast.error('Title is required', {
+        position: 'top-center',
+      });
+    }
+
     if (title.trim() !== '' && status.trim() !== '') {
-      dispatch(
-        addTodo({
-          id: crypto.randomUUID(),
-          title: title.trim(),
-          status,
-          time: new Date().toISOString(),
-        })
-      );
-      toast.success('Task added successfully!', {
-        position: 'top-center',
-      });
-      setShowModal(!showModal);
-      setFormState({ title: '', status: 'uncompleted' });
-    } else {
-      toast.error('Title field is required', {
-        position: 'top-center',
-      });
+      if (type === 'add') {
+        dispatch(
+          addTodo({
+            id: crypto.randomUUID(),
+            title: title.trim(),
+            status,
+            time: new Date().toISOString(),
+          })
+        );
+        toast.success('Task added successfully!');
+        setShowModal(!showModal);
+        setFormState({ title: '', status: 'uncompleted' });
+      } else if (type === 'edit') {
+        dispatch(
+          updateTodo({
+            ...todo,
+            title: title.trim(),
+            status,
+          })
+        );
+        toast.success('Task updated successfully!');
+        setShowModal(!showModal);
+      }
     }
   };
 
@@ -90,7 +114,7 @@ function TodoModal({ type, showModal, setShowModal }: TodoModalProps) {
           </label>
           <div className="flex justify-start items-center mt-5 gap-4">
             <Button variant="primary" type="submit">
-              Add
+              {type === 'add' ? 'Add' : 'Edit'}
             </Button>
             <Button
               variant="secondary"
