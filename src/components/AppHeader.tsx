@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateFilter } from '../actions/todoActions';
@@ -11,8 +11,8 @@ function AppHeader() {
 
   const dispatch = useDispatch();
 
-  const handleFilter = ({ target }: Event) => {
-    const { value } = target as HTMLInputElement;
+  const handleFilter = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = target;
     dispatch(updateFilter(value));
   };
 
