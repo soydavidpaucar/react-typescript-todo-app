@@ -23,11 +23,13 @@ function AppContent() {
   });
 
   return (
-    <div>
+    <div className="bg-[#112240]/50 p-5">
       {sortedTodos && sortedTodos.length > 0 ? (
         sortedTodos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
       ) : (
-        <div />
+        <p className="text-base text-[#ccd6f6] text-center m-auto py-1 px-3 bg-[#8892b0]/[.20] backdrop-blur rounded max-w-fit">
+          No tasks found!
+        </p>
       )}
     </div>
   );
