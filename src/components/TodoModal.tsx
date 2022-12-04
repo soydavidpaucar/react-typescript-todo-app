@@ -43,9 +43,7 @@ function TodoModal({ type, showModal, setShowModal, todo }: TodoModalProps) {
     event.preventDefault();
 
     if (title === '') {
-      toast.error('Title is required', {
-        position: 'top-center',
-      });
+      toast.error('Title is required');
     }
 
     if (title.trim() !== '' && status.trim() !== '') {
