@@ -4,6 +4,7 @@ import { MdDelete, MdEdit } from 'react-icons/all';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import { motion } from 'framer-motion';
 import { deleteTodo, updateStatus } from '../actions/todoActions';
 import CheckButton from './CheckButton';
 import TodoModal from './TodoModal';
@@ -16,6 +17,14 @@ interface Todo {
 }
 type TodoItemProps = {
   todo: Todo;
+};
+
+const child = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
 };
 
 function TodoItem({ todo }: TodoItemProps) {
@@ -50,7 +59,9 @@ function TodoItem({ todo }: TodoItemProps) {
 
   return (
     <>
-      <div className="flex items-center justify-between p-[10px] mb-4 rounded last:mb-0 bg-[#8892b0]/[.20] backdrop-blur">
+      <motion.div
+        className="flex items-center justify-between p-[10px] mb-4 rounded last:mb-0 bg-[#8892b0]/[.20] backdrop-blur"
+        variants={child}>
         <div className="flex items-center justify-start gap-[10px]">
           <CheckButton check={check} handleCheck={handleCheck} />
           <div className="flex flex-col overflow-hidden">
@@ -81,7 +92,7 @@ function TodoItem({ todo }: TodoItemProps) {
             <MdDelete />
           </button>
         </div>
-      </div>
+      </motion.div>
       <TodoModal
         type="edit"
         showModal={showModal}
