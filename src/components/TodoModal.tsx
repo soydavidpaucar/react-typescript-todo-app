@@ -61,15 +61,19 @@ function TodoModal({ type, showModal, setShowModal, todo }: TodoModalProps) {
         toast.success('Task added successfully!');
         setShowModal(!showModal);
       } else if (type === 'edit') {
-        dispatch(
-          updateTodo({
-            ...todo,
-            title: title.trim(),
-            status,
-          })
-        );
-        toast.success('Task updated successfully!');
-        setShowModal(!showModal);
+        if (todo?.title !== title || todo.status !== status) {
+          dispatch(
+            updateTodo({
+              ...todo,
+              title: title.trim(),
+              status,
+            })
+          );
+          toast.success('Task updated successfully!');
+          setShowModal(!showModal);
+        } else {
+          toast.error('No changes made');
+        }
       }
     }
   };
