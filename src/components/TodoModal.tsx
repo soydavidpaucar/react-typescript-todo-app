@@ -26,8 +26,10 @@ function TodoModal({ type, showModal, setShowModal, todo }: TodoModalProps) {
   useEffect(() => {
     if (todo) {
       setFormState({ title: todo.title, status: todo.status });
+    } else {
+      setFormState({ title: '', status: 'uncompleted' });
     }
-  }, [todo]);
+  }, [todo, showModal]);
 
   const dispatch = useDispatch();
   const handleChanges = ({ target }: { target: EventTarget }) => {
@@ -58,7 +60,6 @@ function TodoModal({ type, showModal, setShowModal, todo }: TodoModalProps) {
         );
         toast.success('Task added successfully!');
         setShowModal(!showModal);
-        setFormState({ title: '', status: 'uncompleted' });
       } else if (type === 'edit') {
         dispatch(
           updateTodo({
