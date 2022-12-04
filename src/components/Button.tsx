@@ -10,6 +10,7 @@ type ButtonProps = {
 
 type SelectButtonProps = {
   children: ReactNode;
+  value?: string;
 };
 
 function Button({ children, type, variant, ...additionalProps }: ButtonProps) {
@@ -28,9 +29,11 @@ function Button({ children, type, variant, ...additionalProps }: ButtonProps) {
   );
 }
 
-function SelectButton({ children }: SelectButtonProps) {
+function SelectButton({ children, ...additionalProps }: SelectButtonProps) {
   return (
-    <select className="inline-block h-auto py-[8px] px-[20px] border-none rounded font-medium text-base capitalize w-[150px] bg-[#8892b0] text-[#ccd6f6]">
+    <select
+      className="inline-block h-auto py-[8px] px-[20px] border-none rounded font-medium text-base capitalize w-[150px] bg-[#8892b0] text-[#ccd6f6]"
+      {...additionalProps}>
       {children}
     </select>
   );
