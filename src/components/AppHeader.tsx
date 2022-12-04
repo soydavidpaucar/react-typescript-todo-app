@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Button, SelectButton } from './Button';
 import TodoModal from './TodoModal';
 
@@ -18,7 +19,7 @@ function AppHeader() {
         <option value="completed">Completed</option>
         <option value="uncompleted">Uncompleted</option>
       </SelectButton>
-      <TodoModal showModal={showModal} setShowModal={setShowModal} />
+      <TodoModal type="add" showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
