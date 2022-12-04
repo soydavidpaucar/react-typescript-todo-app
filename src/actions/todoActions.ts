@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
 interface Todo {
@@ -17,6 +18,7 @@ const getInitialTodos = () => {
 
 const initialValue = {
   todos: getInitialTodos(),
+  filter: 'all',
 };
 
 const todosSlice = createSlice({
@@ -56,9 +58,12 @@ const todosSlice = createSlice({
         localStorage.setItem('todos', JSON.stringify(state.todos));
       }
     },
+    updateFilter: (state, action) => {
+      state.filter = action.payload;
+    },
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo, updateStatus } =
+export const { addTodo, deleteTodo, updateTodo, updateStatus, updateFilter } =
   todosSlice.actions;
 export default todosSlice.reducer;
