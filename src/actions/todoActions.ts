@@ -24,16 +24,13 @@ const todosSlice = createSlice({
   initialState: initialValue,
   reducers: {
     addTodo: (state, action) => {
-      return {
-        ...state,
-        todos: [...state.todos, action.payload],
-      };
+      state.todos.push(action.payload);
     },
     deleteTodo: (state, action) => {
-      return {
-        ...state,
-        todos: state.todos.filter((todo: Todo) => todo.id !== action.payload),
-      };
+      const index = state.todos.findIndex(
+        (todo: Todo) => todo.id === action.payload
+      );
+      state.todos.splice(index, 1);
     },
   },
 });
