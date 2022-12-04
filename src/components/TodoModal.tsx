@@ -1,9 +1,10 @@
-import { MdOutlineClose } from 'react-icons/md';
 import { FormEvent, useState } from 'react';
+import { MdOutlineClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { Button } from './Button';
+
 import { addTodo } from '../actions/todoActions';
+import { Button } from './Button';
 
 type TodoModalProps = {
   type: string;
