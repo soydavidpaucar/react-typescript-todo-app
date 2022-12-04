@@ -34,8 +34,19 @@ const todosSlice = createSlice({
       state.todos.splice(index, 1);
       localStorage.setItem('todos', JSON.stringify(state.todos));
     },
+    updateTodo: (state, action) => {
+      const todos = localStorage.getItem('todos');
+      if (todos) {
+        const parsedTodos = JSON.parse(todos);
+        const index = parsedTodos.findIndex(
+          (todo: Todo) => todo.id === action.payload.id
+        );
+        state.todos.splice(index, 1, action.payload);
+        localStorage.setItem('todos', JSON.stringify(state.todos));
+      }
+    },
   },
 });
 
-export const { addTodo, deleteTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, updateTodo } = todosSlice.actions;
 export default todosSlice.reducer;
