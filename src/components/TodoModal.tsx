@@ -6,11 +6,12 @@ import { Button } from './Button';
 import { addTodo } from '../actions/todoActions';
 
 type TodoModalProps = {
+  type: string;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
 };
 
-function TodoModal({ showModal, setShowModal }: TodoModalProps) {
+function TodoModal({ type, showModal, setShowModal }: TodoModalProps) {
   const [{ title, status }, setFormState] = useState({
     title: '',
     status: 'uncompleted',
@@ -34,7 +35,7 @@ function TodoModal({ showModal, setShowModal }: TodoModalProps) {
           id: crypto.randomUUID(),
           title: title.trim(),
           status,
-          time: new Date().toLocaleString(),
+          time: new Date().toISOString(),
         })
       );
       toast.success('Task added successfully!', {
@@ -61,7 +62,7 @@ function TodoModal({ showModal, setShowModal }: TodoModalProps) {
         </button>
         <form className="w-full" onSubmit={(event) => handleSubmit(event)}>
           <h2 className="text-[#ccd6f6] capitalize text-[20px] font-semibold mb-5">
-            Add TODO
+            {type === 'add' ? 'Add' : 'Edit'} Task
           </h2>
           <label className="text-[#ccd6f6] text-base" htmlFor="title">
             Title

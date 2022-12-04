@@ -39,7 +39,7 @@ function TodoItem({ todo }: TodoItemProps) {
             {todo.title}
           </p>
           <p className="block text-[12px] font-light mt-[-2px] text-[#8892b0]">
-            {format(new Date(todo.time), 'p, dd MMM yyyy')}
+            {format(new Date(todo.time), 'dd MMM yyyy, hh:mm a')}
           </p>
         </div>
       </div>
