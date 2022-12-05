@@ -7,7 +7,8 @@
 - [Table of Contents](#table-of-contents)
   - [Links](#links)
   - [Built With](#built-with)
-  - [Run Locally](#run-locally)
+  - [Live Preview](#live-preview)
+  - [Live Site](#live-site)
   - [Author](#author)
   - [License](#license)
 
@@ -28,31 +29,13 @@
 - Tailwind CSS
 - Local Storage
 
-## Run Locally
+## Live Preview
 
-Clone the project
+![Live Preview](https://i.ibb.co/s9fwCG3/Clean-Shot-2022-12-04-at-22-58-13-2x.png)
 
-```bash
-  git clone https://github.com/soydavidpaucar/react-typescript-todo-app.git
-```
+## Live Site
 
-Go to the project directory
-
-```bash
-  cd react-typescript-todo-app
-```
-
-Install dependencies
-
-```bash
-  yarn
-```
-
-Start the server
-
-```bash
-  yarn preview
-```
+[Live](https://todo.davidpaucar.com 'Live')
 
 ## Author
 
