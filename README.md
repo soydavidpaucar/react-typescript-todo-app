@@ -15,7 +15,6 @@
 ## Links
 
 - [Repo](https://github.com/soydavidpaucar/react-typescript-todo-app 'GitHub Repo')
-- [Live](https://gifapp.davidpaucar.com 'Live')
 
 ## Built With
 
