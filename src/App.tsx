@@ -1,14 +1,26 @@
-import 'react-toastify/dist/ReactToastify.min.css';
-
-import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'react-hot-toast';
 
 import AppContent from './components/AppContent';
 import AppHeader from './components/AppHeader';
 import PageTitle from './components/PageTitle';
 
-const contextClass = {
-  success: 'backdrop-blur bg-[#8892b0]/[.6] text-[#ccd6f6] font-sans text-sm',
-  error: 'backdrop-blur bg-red-600/[.60] text-[#ccd6f6] font-sans text-sm',
+const toastOptions = {
+  success: {
+    style: {
+      background: '#8892b06a',
+      color: '#ccd6f6',
+      backdropFilter: 'blur(10px)',
+      fontSize: '16px',
+    },
+  },
+  error: {
+    style: {
+      background: '#8892b06a',
+      color: '#ccd6f6',
+      backdropFilter: 'blur(10px)',
+      fontSize: '16px',
+    },
+  },
 };
 
 function App() {
@@ -23,14 +35,7 @@ function App() {
           </div>
         </div>
       </div>
-      <ToastContainer
-        toastClassName={({ type }) =>
-          `${
-            contextClass[type || 'default']
-          } relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer mb-5`
-        }
-        position="top-center"
-      />
+      <Toaster toastOptions={toastOptions} />
     </>
   );
 }

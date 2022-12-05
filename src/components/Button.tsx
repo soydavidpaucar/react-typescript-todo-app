@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 
 type ButtonProps = {
   children: string;
@@ -11,7 +11,7 @@ type ButtonProps = {
 type SelectButtonProps = {
   children: ReactNode;
   value?: string;
-  onChange?: () => void;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 };
 
 function Button({ children, type, variant, ...additionalProps }: ButtonProps) {

@@ -1,4 +1,11 @@
-function SearchBar({ ...additionalProps }) {
+import { ChangeEvent } from 'react';
+
+type SearchBarProps = {
+  value?: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+function SearchBar({ ...additionalProps }: SearchBarProps) {
   return (
     <input
       type="text"

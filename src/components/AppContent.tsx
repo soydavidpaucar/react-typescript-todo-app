@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 
+import { RootState } from '../app/store';
 import TodoItem from './TodoItem';
 
 type Todo = {
@@ -8,10 +9,6 @@ type Todo = {
   title: string;
   status: 'completed' | 'uncompleted';
   time: string;
-};
-
-type TodoState = {
-  todos: Todo[];
 };
 
 const container = {
@@ -34,19 +31,19 @@ const child = {
 };
 
 function AppContent() {
-  const todos = useSelector((state: { todos: TodoState }) => state.todos.todos);
+  const todos: Todo[] = useSelector((state: RootState) => state.todos.todos);
 
-  const filter = useSelector((state) => state.todos.filter);
+  const filter: string = useSelector((state: RootState) => state.todos.filter);
 
-  const search = useSelector((state) => state.todos.search);
+  const search: string = useSelector((state: RootState) => state.todos.search);
 
-  const sortedTodos = [...todos].sort((a, b) => {
+  const sortedTodos: Todo[] = [...todos].sort((a, b) => {
     const aDate = new Date(a.time);
     const bDate = new Date(b.time);
     return bDate.getTime() - aDate.getTime();
   });
 
-  const filteredTodos = sortedTodos.filter((todo) => {
+  const filteredTodos = sortedTodos.filter((todo: Todo) => {
     if (filter === 'all') {
       return todo.title.toLowerCase().includes(search.toLowerCase());
     }

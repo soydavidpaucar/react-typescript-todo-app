@@ -2,27 +2,26 @@ import { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { searchTodo, updateFilter } from '../actions/todoActions';
+import { RootState } from '../app/store';
 import { Button, SelectButton } from './Button';
-import TodoModal from './TodoModal';
 import SearchBar from './SearchBar';
+import TodoModal from './TodoModal';
 
 function AppHeader() {
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const filterStatus = useSelector((state) => state.todos.filter);
+  const filterStatus = useSelector((state: RootState) => state.todos.filter);
 
-  const search = useSelector((state) => state.todos.search);
+  const search = useSelector((state: RootState) => state.todos.search);
 
   const dispatch = useDispatch();
 
-  const handleFilter = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = target;
-    dispatch(updateFilter(value));
+  const handleFilter = (event: ChangeEvent<HTMLSelectElement>): void => {
+    dispatch(updateFilter(event.target.value));
   };
 
-  const handleSearch = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = target;
-    dispatch(searchTodo(value));
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
+    dispatch(searchTodo(event.target.value));
   };
 
   return (

@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { MdDelete, MdEdit } from 'react-icons/all';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 
-import { motion } from 'framer-motion';
 import { deleteTodo, updateStatus } from '../actions/todoActions';
 import CheckButton from './CheckButton';
 import TodoModal from './TodoModal';
