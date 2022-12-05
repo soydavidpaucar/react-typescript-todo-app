@@ -40,7 +40,7 @@
 
 **David Paucar**
 
-- [Profile](https://www.linkedin.com/in/davidpaucar/ 'David Paucar')
+- [LinkedIn Profile](https://www.linkedin.com/in/davidpaucar/ 'David Paucar')
 - [Email](mailto:soydavidpaucar@gmail.com 'Hi!')
 
 ## License
