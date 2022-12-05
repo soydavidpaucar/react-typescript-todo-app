@@ -38,6 +38,8 @@ function AppContent() {
 
   const filter = useSelector((state) => state.todos.filter);
 
+  const search = useSelector((state) => state.todos.search);
+
   const sortedTodos = [...todos].sort((a, b) => {
     const aDate = new Date(a.time);
     const bDate = new Date(b.time);
@@ -46,14 +48,17 @@ function AppContent() {
 
   const filteredTodos = sortedTodos.filter((todo) => {
     if (filter === 'all') {
-      return true;
+      return todo.title.toLowerCase().includes(search.toLowerCase());
     }
-    return todo.status === filter;
+    return (
+      todo.status === filter &&
+      todo.title.toLowerCase().includes(search.toLowerCase())
+    );
   });
 
   return (
     <motion.div
-      className="bg-[#112240]/50 p-5"
+      className="bg-[#112240]/50 p-5 mt-8 md: mt-0"
       variants={container}
       initial="hidden"
       animate="visible">

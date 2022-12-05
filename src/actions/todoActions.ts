@@ -19,6 +19,7 @@ const getInitialTodos = () => {
 const initialValue = {
   todos: getInitialTodos(),
   filter: 'all',
+  search: '',
 };
 
 const todosSlice = createSlice({
@@ -61,9 +62,18 @@ const todosSlice = createSlice({
     updateFilter: (state, action) => {
       state.filter = action.payload;
     },
+    searchTodo: (state, action) => {
+      state.search = action.payload;
+    },
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo, updateStatus, updateFilter } =
-  todosSlice.actions;
+export const {
+  addTodo,
+  deleteTodo,
+  updateTodo,
+  updateStatus,
+  updateFilter,
+  searchTodo,
+} = todosSlice.actions;
 export default todosSlice.reducer;
