@@ -13,7 +13,8 @@
     "test": "vitest",
     "lint:fix": "eslint --fix --ext .ts,tsx,js,jsx --ignore-path .gitignore .",
     "prettier:write": "prettier -u -w --ignore-path .gitignore \"*.{ts,tsx,css,html,js,jsx,json,md}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "serve dist -s -n -L -p $PORT"
   },
   "dependencies": {
     "@fontsource/poppins": "^4.5.10",
