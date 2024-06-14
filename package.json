@@ -24,7 +24,8 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "serve": "^14.2.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
